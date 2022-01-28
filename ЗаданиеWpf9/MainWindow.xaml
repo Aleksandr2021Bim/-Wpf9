@@ -1,0 +1,81 @@
+﻿<Window x:Class="ЗаданиеWpf9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ЗаданиеWpf9"
+         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:tst="clr-namespace:System.Collections;assembly=mscorlib"
+        
+        mc:Ignorable="d"
+        Title="Светлое и темное" Height="450" Width="800" Style="{DynamicResource WindowStyle}">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="MenuItem_Click"/>
+        <CommandBinding Command="Save" Executed="MenuItem_Click_1"/>
+        <CommandBinding Command="local:MyCommand.Exit" Executed="MenuItem_Click_2"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Margin="5" VerticalContentAlignment="Top">
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Открыть" Command="Open" Style="{DynamicResource TextBlockStyle}"/>
+                <MenuItem Header="_Сохранить" Command="Save" Style="{DynamicResource TextBlockStyle}"/>
+                <Separator/>
+                <MenuItem Header="_Выход" Command="local:MyCommand.Exit" Style="{DynamicResource TextBlockStyle}"/>
+            </MenuItem>
+            <MenuItem Header="_Правка">
+                <MenuItem Header="Копировать" Command="Copy" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource TextBlockStyle}"/>
+                <MenuItem Header="Вставить" Command="Paste" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource TextBlockStyle}"/>
+            </MenuItem>
+            <MenuItem Header="Справка" Style="{DynamicResource TextBlockStyle}"/>
+            <MenuItem Header="Тема">
+                <MenuItem Header="Светлая" Click="MenuItem_Click_3" Style="{DynamicResource TextBlockStyle}"/>
+                <MenuItem Header="Темная" Click="MenuItem_Click_4" Style="{DynamicResource TextBlockStyle}"/>
+            </MenuItem>
+        </Menu>
+        <Grid DockPanel.Dock="Top" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="303*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="323*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ToolBarTray Grid.Row="0" Margin="5" Grid.ColumnSpan="3" Style="{DynamicResource TextBlockStyle}">
+                <ToolBar Margin="5" Padding="5">
+                    <ComboBox Margin="5" Padding="5" IsEditable="True" SelectedIndex="0" Width="200" ItemsSource="{StaticResource fontName}" SelectionChanged="ComboBox_SelectionChanged"/>
+                </ToolBar>
+                <ToolBar Margin="5" Padding="5">
+                    <ComboBox Margin="5" Padding="5" IsEditable="True" SelectedIndex="1" Width="50" ItemsSource="{StaticResource fontSize}" SelectionChanged="ComboBox_SelectionChanged_1">
+
+                    </ComboBox>
+                </ToolBar>
+                <ToolBar Margin="5" Padding="5" >
+                    <Button Click="ButtonBoid_Click">
+                        <Image Source="Data/Bold.32х32.png"/>
+                    </Button>
+                    <Separator/>
+                    <Button Click="ButtonItalic_Click">
+                        <Image Source="Data/italic.32х32.png"/>
+                    </Button>
+                    <Separator/>
+                    <Button Click="ButtonUnderline_Click">
+                        <Image Source="Data/underline.32х32.png"/>
+                    </Button>
+                </ToolBar>
+                <ToolBar Margin="5" Padding="5">
+                    <StackPanel VerticalAlignment="Center">
+                        <RadioButton Content="черный" Checked ="RadioButton_Checked" IsChecked="True"/>
+                        <RadioButton Content="красный" Checked="RadioButton_Checked_1"/>
+                    </StackPanel>
+                </ToolBar>
+            </ToolBarTray>
+        </Grid>
+        <TextBox x:Name="textBox" Grid.Row="2" Margin="5" Padding="5" FontSize="14" FontFamily="Arial" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Style="{DynamicResource TextBlockStyle}">
+
+        </TextBox>
+    </DockPanel>
+</Window>
